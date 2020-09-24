@@ -1,0 +1,23 @@
+version: '3.8'
+
+services: 
+    database:
+        image: mysql
+        container_name: db 
+        restart: always
+        ports: 
+            - '3306:3306'
+        environment: 
+            MYSQL_ROOT_PASSWORD: root
+            
+
+    phpadmin:
+        depends_on:
+            - database
+        image: phpmyadmin/phpmyadmin
+        container_name: phpadmin
+        restart: always
+        ports: 
+            - '8085:80'
+        environment: 
+            PMA_HOST: database
